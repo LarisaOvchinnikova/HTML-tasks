@@ -5,6 +5,7 @@
     <title>Guessing game</title>
     <script>
     var number = Math.floor(Math.random() * 100 + 1);
+    var tries = 0;
     function newGame(){
         number = Math.floor(Math.random() * 100 + 1);
         document.getElementById("guess").focus();
@@ -12,6 +13,7 @@
     }
     function checkGuess(){
         var guess = document.getElementById("guess").value;
+        tries++;
         var msg = "";
         if (guess > number) {
             msg = guess + " was too high. Try again.";
@@ -26,6 +28,8 @@
         output.innerHTML = msg;
         document.getElementById("guess").focus();
         document.getElementById("guess").select();
+        var tr = document.getElementById("tries");
+        tr.innerText = "You used " + tries + " tries." ;
     }
 
     </script>
@@ -35,8 +39,9 @@
     <form onsubmit="checkGuess(); return false;">
         Enter a number between 1 and 100:
         <input type="text" id="guess" size="1">
-        <button type="button" onclick="checkGuess()">Guess!</button>
+        <button type="button" onclick="checkGuess()" >Guess!</button>
     </form>
     <h3 id="output">Guess a number and press the button</h3>
+    <h4 id="tries"></h4>
 </body>
 </html>
